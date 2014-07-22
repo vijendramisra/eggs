@@ -8,13 +8,19 @@ var path = require('path');
 
 /*app.use('/assets', express.static(__dirname + '/js'));*/
 
+app.configure( 
+    function() {
+      app.set('port', process.env.PORT || 5000);
+    }
+);
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use("/images", express.static(__dirname + '/images'));
 
 
 var port = Number(process.env.PORT || 5000);
 
-http.listen(port, function(){
+http.listen(app.get('port'), function(){
 	console.log('listening on *:3000')
 });
 
